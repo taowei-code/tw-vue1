@@ -1,4 +1,5 @@
-import protoArgument from './protoArgument'
+import protoArgument from './protoArgument.js'
+import defineReactive from './defineReactive.js'
 function Observer(obj) {
   if (typeof obj !== 'object' || obj === null) return
   if (Array.isArray(obj)) {

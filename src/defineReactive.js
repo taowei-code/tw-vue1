@@ -1,4 +1,4 @@
-import observe from "./observe"
+import observe from "./observe.js"
 function defineReactive(target, key, val) {
   observe(val) //对象里的属性的值也为对象，
   Object.defineProperty(target, key, {
@@ -14,16 +14,4 @@ function defineReactive(target, key, val) {
     }
   })
 }
-
-
-
-const obj = {
-  a: '1',
-  b: {
-    name: '22'
-  },
-  c: [1, 2, 3]
-}
-observe(obj)
-obj.c.push(11)
-obj.c
+export default defineReactive
