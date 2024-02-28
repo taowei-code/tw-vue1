@@ -5,6 +5,7 @@ function defineReactive(target, key, val) {
   const dep = new Dep()
   Object.defineProperty(target, key, {
     get() {
+      // 收集依赖，收集依赖于当前属性的订阅者
       if(Dep.target){
         dep.depend()
         // 如果存在子 ob ，则一起把子对象的依赖收集
@@ -20,6 +21,7 @@ function defineReactive(target, key, val) {
       console.log('set----', `${key}---${newVal}`)
       val = newVal
       observe(newVal)
+      // 派发更新，通知依赖于该属性的订阅者更新
       dep.notify()
     }
   })

@@ -7,7 +7,7 @@ Dep.prototype.depend = function(){
   this.watchers.push(Dep.target)
 }
 Dep.prototype.notify = function(){
-  for(let watcher in this.watchers){
+  for(let watcher of this.watchers){
     watcher.update()
   }
 }

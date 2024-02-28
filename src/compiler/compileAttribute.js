@@ -17,7 +17,7 @@ export default function compileAttribute(node, vm) {
 // v-on 原理 添加一个 click 事件
 function compileVOn(node, method, vm) {
   node.addEventListener('click', function (...args) {
-    vm.$options.method[name].apply(vm, args)
+    vm.$options.methods[method].apply(vm, args)
   })
 }
 function compileVBind(node, attrName, attrValue, vm) {
@@ -43,8 +43,20 @@ function compileVModel(node, key, vm) {
     })
   } else if (tagName === 'input' && type === 'checkbox') {
     // <input type="checkbox" v-model="key" />
+    // 输入框初始值
+    node.checked = vm[key]
+    // 响应式
+    node.addEventListener('change', function () {
+      vm[key] = node.checked
+    })
   } else if (tagName === 'select') {
     // 只处理单选
     // <select v-model="key"></select>
+    // 输入框初始值
+    node.value = vm[key]
+    // 响应式
+    node.addEventListener('change', function () {
+      vm[key] = node.value
+    })
   }
 }
