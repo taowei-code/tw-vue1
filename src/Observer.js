@@ -4,6 +4,7 @@ import Dep from './dep.js'
 import observe from './observe.js'
 
 function Observer(obj) {
+  // 防止 __ob__属性被遍历出来
   Object.defineProperty(obj,'__ob__',{
     value:this,
     enumerable:false,
